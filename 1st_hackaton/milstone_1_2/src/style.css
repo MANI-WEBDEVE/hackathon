@@ -1,127 +1,129 @@
 /* General reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f7f8fc;
-    line-height: 1.6;
-    color: #333;
-    padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f8fc;
+  line-height: 1.6;
+  color: #333;
+  padding: 20px;
 }
 
 /* Resume container */
 .resume {
-    max-width: 900px;
-    margin: 0 auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Header section */
 header {
-    background-color: #007BFF;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+  background-color: #007BFF;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
+.img {
+  height: 60px;
+  width: 60px;
+  border: 1px solid white;
+  border-radius: 50px;
+}
+.img img {
+  object-fit: cover;
+  border-radius: 50px;
+
+}
 
 .header-content h1 {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 .header-content p {
-    font-size: 1.2rem;
-    margin-top: 10px;
+  font-size: 1.2rem;
+  margin-top: 10px;
 }
-.img {
-   border-radius: 50px;
-   width: 60px;
-   height: 60px;
-   border: 1px solid white;
-}
-.img img {
-    object-fit: cover;
-    border-radius: 50px;
-}
+
 /* Section styling */
 section {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 h2 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #007BFF;
-    border-bottom: 2px solid #007BFF;
-    display: inline-block;
-    padding-bottom: 5px;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #007BFF;
+  border-bottom: 2px solid #007BFF;
+  display: inline-block;
+  padding-bottom: 5px;
 }
 
 /* Profile section */
 .profile p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
 }
 
 /* Education and contact sections */
 .education ul,
 .contact ul,
 .languages ul {
-    list-style-type: none;
-    font-size: 1rem;
-    color: #555;
+  list-style-type: none;
+  font-size: 1rem;
+  color: #555;
 }
 
 ul li {
-    padding: 5px 0;
+  padding: 5px 0;
 }
 
 /* Skills toggle button */
 button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 #skills ul {
-    list-style: square inside;
-    font-size: 1rem;
-    color: #555;
+  list-style: square inside;
+  font-size: 1rem;
+  color: #555;
 }
 
 /* Miscellaneous */
 a {
-    color: #007BFF;
-    text-decoration: none;
+  color: #007BFF;
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }

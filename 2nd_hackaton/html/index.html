@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NavBar GSAP</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="cursor">
+      </div>
+      <div class="cursor1"></div>
+      <div class="nav">
+        <div class="navbar">
+          <div class="logo">
+            <h1 class="h1">PRO<span>DUCT</span> MANG</h1>
+          </div>
+          <div class="icon">
+            <img src="../public/icons8-menu-64.png" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="full">
+        <h4 class="h5">Home</h4>
+        <h4 class="h2">Product</h4>
+        <h4 class="h3">Works</h4>
+        <h4 class="h4">Blog</h4>
+        <lord-icon
+          src="https://cdn.lordicon.com/zxvuvcnc.json"
+          trigger="hover"
+          state="hover-cross-3"
+          colors="primary:#EEC800"
+          style="width: 50px; height: 50px"
+        >
+        </lord-icon>
+      </div>
+      <div class="mainInputContainer">
+        <div class="inputContainer">
+          <input
+            type="text"
+            placeholder="Enter the Product Name"
+            class="input1"
+          />
+          <input type="text" placeholder="Enter the Quality" class="input2" />
+          <input type="text" placeholder="Enter the Price" class="input3" />
+          <button class="btn">ADD</button>
+        </div>
+      </div>
+      <div class="mainTable">
+        <table class="productTable">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Quality</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Product 1</td>
+              <td>High</td>
+              <td>$50</td>
+            </tr>
+            <tr>
+              <td>Product 2</td>
+              <td>Medium</td>
+              <td>$30</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      let tl = gsap.timeline();
+      tl.to(".full", {
+        right: "0%",
+        duration: 0.9,
+      });
+
+      tl.from("h4", {
+        x: 200,
+        duration: 0.9,
+        stagger: 0.3,
+        opacity: 0,
+      });
+      tl.from(".full lord-icon", {
+        opacity: 0,
+      });
+      let main = document.querySelector('.main')
+      let cursor = document.querySelector('.cursor')
+      // let heading = document.getElementsByTagName('h4')
+      let heading1 = document.querySelector(".h5")
+      let heading2 = document.querySelector(".h2")
+      let heading3 = document.querySelector(".h3")
+      let heading4 = document.querySelector(".h4")
+
+      let cursor1 = document.querySelector('.cursor1')
+      let hamBurger = document.querySelector(".nav img");
+      let closeIcon = document.querySelector(".full lord-icon");
+
+      hamBurger.addEventListener("click", (e) => {
+        tl.play();
+      });
+
+      closeIcon.addEventListener("click", (e) => {
+        tl.reverse();
+      });
+
+      main.addEventListener("mousemove", (det) => {
+        // console.log(det)
+        gsap.to(cursor, {
+          x: det.x,
+          y: det.y,
+          duration: 1,
+          // ease: "power2.out",
+          ease: "power9.in",
+        });
+        gsap.to(cursor1, {
+          x: det.x,
+          y: det.y,
+          duration: 1.9,
+          // ease: "power2.out",
+          ease: "power9.in",
+        });
+      });
+
+const animateText = () => {
+  tl.from(heading1, {
+    y:"100%",
+    duration: 0.8,
+    opacity: 0
+  })
+}
+
+      heading1.addEventListener('mouseenter', animateText)
+
+
+
+      tl.pause();
+    </script>
+    <script src="../javascript/app.js"></script>
+  </body>
+</html>

@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // const toggleButton = document.getElementById(
-  //   "toggleSkills"
-  // ) as HTMLButtonElement;
   const skillsSection = document.getElementById("skillSection") as HTMLElement;
   const fullNameInput = document.getElementById("fullName") as HTMLInputElement;
   const professionalTag = document.getElementById(
@@ -59,9 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
       educationInput.value.trim() !== "" &&
       skillsInput.value.trim() !== ""
     ) {
-      generateButton.disabled = false; // Enable the button if all fields are filled
+      generateButton.disabled = false;
     } else {
-      generateButton.disabled = true; // Keep it disabled if any field is empty
+      generateButton.disabled = true;
     }
   }
 
@@ -121,10 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
     editButton.style.display = "block";
   });
   editButton.addEventListener("click", () => {
-    // Switch back to form mode
     resumeForm.style.display = "block";
 
-    // Hide the "Edit" button and show the "Generate Resume" button again
     editButton.style.display = "none";
     editButton.style.flex = "0";
     editButton.style.marginBottom = "12px";

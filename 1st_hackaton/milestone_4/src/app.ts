@@ -36,13 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const resumeSkills = document.querySelector(".skill") as HTMLElement;
   const resumeForm = document.querySelector(".resumeForm") as HTMLElement;
   const resumeDisplay = document.querySelector(".resume") as HTMLElement;
+  const editButton = document.querySelector(".btnEdit") as HTMLElement
 
-  const editButton = document.createElement("button");
-  editButton.textContent = "Edit Resume";
-  editButton.classList.add("btnEdit");
   editButton.style.display = "none"; // Hidden initially
   editButton.style.marginBottom = "12px";
-  generateButton.insertAdjacentElement("afterend", editButton);
 
   generateButton.disabled = true;
 
@@ -71,6 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
   skillsInput.addEventListener("input", checkInputs);
 
   generateButton.addEventListener("click", () => {
+    resumeForm.style.display = 'none';
+    resumeDisplay.style.display = 'block';
     resumeName.textContent = fullNameInput.value;
 
     proTag.textContent = professionalTag.value;
@@ -118,7 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
     editButton.style.display = "block";
   });
   editButton.addEventListener("click", () => {
-    resumeForm.style.display = "block";
+    resumeForm.style.display = 'block';
+    resumeDisplay.style.display = 'none';
 
     editButton.style.display = "none";
     editButton.style.flex = "0";

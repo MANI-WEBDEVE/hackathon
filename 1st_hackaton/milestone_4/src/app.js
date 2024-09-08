@@ -21,12 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const resumeSkills = document.querySelector(".skill");
     const resumeForm = document.querySelector(".resumeForm");
     const resumeDisplay = document.querySelector(".resume");
-    const editButton = document.createElement("button");
-    editButton.textContent = "Edit Resume";
-    editButton.classList.add("btnEdit");
+    const editButton = document.querySelector(".btnEdit");
     editButton.style.display = "none"; // Hidden initially
     editButton.style.marginBottom = "12px";
-    generateButton.insertAdjacentElement("afterend", editButton);
     generateButton.disabled = true;
     // Function to check if all inputs are filled
     function checkInputs() {
@@ -51,6 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
     skillsInput.addEventListener("input", checkInputs);
     generateButton.addEventListener("click", () => {
         var _a;
+        resumeForm.style.display = 'none';
+        resumeDisplay.style.display = 'block';
         resumeName.textContent = fullNameInput.value;
         proTag.textContent = professionalTag.value;
         resumeAddreas.childNodes[1].textContent = addreasInput.value;
@@ -87,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
         editButton.style.display = "block";
     });
     editButton.addEventListener("click", () => {
-        resumeForm.style.display = "block";
+        resumeForm.style.display = 'block';
+        resumeDisplay.style.display = 'none';
         editButton.style.display = "none";
         editButton.style.flex = "0";
         editButton.style.marginBottom = "12px";

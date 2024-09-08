@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume of Muhammad Inam</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div>
+    </div>
+    <div class="resumeForm">
+      <div class="mainForm">
+      <h1>Resume Builder</h1>
+
+        <div class="inputContainer">
+          <input id="fullName" type="text" placeholder="Enter Your FullName" />
+          <input id="professionalTag" type="text" placeholder="Enter Your Professional Tag" />
+          <input id="email" type="text" placeholder="Enter Your Email" />
+          <input id="phoneNumber" type="text" placeholder="Enter Your Phone Number" />
+          <label for="Chose image"> Chose Your image </label>
+          <input id="image" type="file"/>
+          <input id="addreasInput" type="text" placeholder="Enter Yiue addreas"/>
+          <textarea id="profileSummary" placeholder="Profile Summary"></textarea>
+          <textarea id="education" placeholder="Education Details"></textarea>
+          <input id="skills" type="text" placeholder="Enter Your Skills" />
+        </div>
+        <button class="btnRe">Generate Resume</button>
+      </div>
+    </div>
+
+    <div class="resume">
+    
+      <header>
+        <div class="header-content">
+          <h1>Muhammad Inam</h1>
+          <p>Web Developer</p>
+        </div>
+        <div class="img">
+          <img src="" width="60px" height="60px" alt="" />
+        </div>
+      </header>
+
+      <section class="profile">
+        <h2>Profile Summary</h2>
+        <p class="profileup">
+          TypeScript, React-based web developer full of enthusiasm. Excited
+          about creating web experiences with a heavy focus on the user.
+          Front-end developer with a lot of imagination and attention to detail,
+          proficient in HTML, CSS, TypeScript, and React.JS. Strong in back-end
+          technologies like NodeJS, ExpressJS, and MongoDB.
+        </p>
+      </section>
+
+      <section class="education">
+        <h2>Education</h2>
+        <ul>
+          <li>
+            <strong>Unique Secondary School</strong> - Matriculation with
+            Science (2020 - 2022)
+          </li>
+          <li>
+            <strong>Superior Science College</strong> - Intermediate with
+            Pre-Engineering (2022 - 2024)
+          </li>
+        </ul>
+      </section>
+
+      <section class="contact">
+        <h2>Contact</h2>
+        <ul>
+          <li class="phoneNumber"><strong>Phone:</strong> 03323929456</li>
+          <li class="email">
+            <strong>Email:</strong>
+            <a href="mailto:kareeminam2@gmail.com">kareeminam2@gmail.com</a>
+          </li>
+          <li class="addreashome"><strong>Location:</strong>XYZ Addreas</li>
+        </ul>
+      </section>
+
+      <section class="languages">
+        <h2>Languages</h2>
+        <ul>
+          <li>English (Intermediate)</li>
+          <li>Urdu (Fluent)</li>
+        </ul>
+      </section>
+
+      <section id="skillSection" class="skills hidden">
+        <h2>Skills</h2>
+        <ul class="skill">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>TypeScript</li>
+          <li>React.JS</li>
+          <li>TailwindCSS</li>
+          <li>Node.JS</li>
+          <li>Express.JS</li>
+          <li>MongoDB</li>
+          <li>Session & Cookies</li>
+        </ul>
+      </section>
+      <button id="toggleSkills">View Skills</button>
+    </div>
+
+    <script src="./app.js" ></script>
+  </body>
+</html>

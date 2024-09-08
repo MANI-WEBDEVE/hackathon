@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume of Muhammad Inam</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div></div>
+    <div class="resumeForm">
+      <div class="mainForm">
+        <h1>Resume Builder</h1>
+
+        <div class="inputContainer">
+          <input id="fullName" type="text" placeholder="Enter Your FullName" />
+          <input
+            id="professionalTag"
+            type="text"
+            placeholder="Enter Your Professional Tag"
+          />
+          <input id="email" type="text" placeholder="Enter Your Email" />
+          <input
+            id="phoneNumber"
+            type="text"
+            placeholder="Enter Your Phone Number"
+          />
+          <label for="Chose image"> Chose Your image </label>
+          <input id="image" type="file" />
+          <input
+            id="addreasInput"
+            type="text"
+            placeholder="Enter Yiue addreas"
+          />
+          <textarea
+            id="profileSummary"
+            placeholder="Profile Summary"
+          ></textarea>
+          <textarea id="education" placeholder="Education Details"></textarea>
+          <input id="skills" type="text" placeholder="Enter Your Skills" />
+        </div>
+        <button class="btnRe">Generate Resume</button>
+      
+          <button class="btnDownload">Download PDF</button>
+     
+      </div>
+    </div>
+
+    <div class="resume">
+      <header>
+        <div class="header-content">
+          <h1>Muhammad Inam</h1>
+          <p>Web Developer</p>
+        </div>
+        <div class="img">
+          <img src="" width="60px" height="60px" alt="" />
+        </div>
+      </header>
+
+      <section class="profile">
+        <h2>Profile Summary</h2>
+        <p class="profileup">
+          TypeScript, React-based web developer full of enthusiasm. Excited
+          about creating web experiences with a heavy focus on the user.
+          Front-end developer with a lot of imagination and attention to detail,
+          proficient in HTML, CSS, TypeScript, and React.JS. Strong in back-end
+          technologies like NodeJS, ExpressJS, and MongoDB.
+        </p>
+      </section>
+
+      <section class="education">
+        <h2>Education</h2>
+        <ul>
+          <li>
+            <strong>Unique Secondary School</strong> - Matriculation with
+            Science (2020 - 2022)
+          </li>
+          <li>
+            <strong>Superior Science College</strong> - Intermediate with
+            Pre-Engineering (2022 - 2024)
+          </li>
+        </ul>
+      </section>
+
+      <section class="contact">
+        <h2>Contact</h2>
+        <ul>
+          <li class="phoneNumber"><strong>Phone:</strong> 03323929456</li>
+          <li class="email">
+            <strong>Email:</strong>
+            <a href="mailto:kareeminam2@gmail.com">kareeminam2@gmail.com</a>
+          </li>
+          <li class="addreashome"><strong>Location:</strong>XYZ Addreas</li>
+        </ul>
+      </section>
+
+      <section class="languages">
+        <h2>Languages</h2>
+        <ul>
+          <li>English (Intermediate)</li>
+          <li>Urdu (Fluent)</li>
+        </ul>
+      </section>
+
+      <h2>Skills</h2>
+      <section id="skillSection" class="skill">
+        <ul class="skill">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>TypeScript</li>
+          <li>React.JS</li>
+          <li>TailwindCSS</li>
+          <li>Node.JS</li>
+          <li>Express.JS</li>
+          <li>MongoDB</li>
+          <li>Session & Cookies</li>
+        </ul>
+      </section>
+    </div>
+   
+    <script src="./app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+      const downloadButton = document.querySelector(".btnDownload");
+      const skillsInput = document.getElementById("skills");
+      const fullNameInput = document.getElementById("fullName");
+      const professionalTag = document.getElementById("professionalTag");
+      const emailInput = document.getElementById("email");
+      const phoneNumberInput = document.getElementById("phoneNumber");
+      const imageInput = document.getElementById("image");
+      const profileSummaryInput = document.getElementById("profileSummary");
+      const educationInput = document.getElementById("education");
+      const addreasInput = document.getElementById("addreasInput");
+
+      downloadButton.addEventListener("click", () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Set title and font styles
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(22);
+        doc.text(fullNameInput.value || "Muhammad Inam", 105, 20, {
+          align: "center",
+        });
+
+        doc.setFontSize(16);
+        doc.setFont("Helvetica", "normal");
+        doc.text("Web Developer", 105, 30, { align: "center" });
+
+        // Add contact details
+        doc.setFontSize(12);
+        doc.text(
+          `Email: ${emailInput.value || "kareeminam2@gmail.com"}`,
+          10,
+          40
+        );
+        doc.text(`Phone: ${phoneNumberInput.value || "03323929456"}`, 10, 45);
+
+        // Add a line separator
+        doc.setLineWidth(0.5);
+        doc.line(10, 50, 200, 50);
+
+        // Profile Summary
+        doc.setFontSize(16);
+        doc.setFont("Helvetica", "bold");
+        doc.text("Profile Summary", 10, 60);
+
+        doc.setFont("Helvetica", "normal");
+        doc.setFontSize(12);
+        const profileSummary =
+          profileSummaryInput.value ||
+          "TypeScript, React-based web developer full of enthusiasm...";
+        doc.text(profileSummary, 10, 70, { maxWidth: 190 });
+
+        // Education section
+        doc.setFontSize(16);
+        doc.setFont("Helvetica", "bold");
+        doc.text("Education", 10, 90);
+
+        doc.setFont("Helvetica", "normal");
+        const educationText =
+          educationInput.value ||
+          "Matriculation with Science (2020 - 2022), Intermediate with Pre-Engineering (2022 - 2024)";
+        doc.text(educationText, 10, 100, { maxWidth: 190 });
+
+        // Skills section
+        doc.setFontSize(16);
+        doc.setFont("Helvetica", "bold");
+        doc.text("Skills", 10, 120);
+
+        const skillsList = skillsInput.value
+          .split(/[, ]+/)
+          .map((skill) => skill.trim())
+          .filter((skill) => skill);
+        let yPosition = 130; // Start position for skills list
+
+        doc.setFont("Helvetica", "normal");
+        skillsList.forEach((skill) => {
+          if (yPosition > 270) {
+            // New page if content overflows
+            doc.addPage();
+            yPosition = 10;
+          }
+          doc.text(`- ${skill}`, 10, yPosition);
+          yPosition += 10;
+        });
+
+        // Save the PDF
+        doc.save("resume.pdf");
+      });
+    </script>
+  </body>
+</html>

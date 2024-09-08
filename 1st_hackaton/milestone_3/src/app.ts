@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const toggleButton = document.getElementById(
-    "toggleSkills"
-  ) as HTMLButtonElement;
+  // const toggleButton = document.getElementById(
+  //   "toggleSkills"
+  // ) as HTMLButtonElement;
   const skillsSection = document.getElementById("skillSection") as HTMLElement;
   const fullNameInput = document.getElementById("fullName") as HTMLInputElement;
   const professionalTag = document.getElementById(
@@ -87,13 +87,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  toggleButton.addEventListener("click", () => {
-    if (skillsSection.classList.contains("hidden")) {
-      skillsSection.classList.remove("hidden");
-      toggleButton.textContent = "Hide Skills";
-    } else {
-      skillsSection.classList.add("hidden");
-      toggleButton.textContent = "View Skills";
-    }
-  });
+  // toggleButton.addEventListener("click", () => {
+  //   if (skillsSection.classList.contains("hidden")) {
+  //     skillsSection.classList.remove("hidden");
+  //     toggleButton.textContent = "Hide Skills";
+  //   } else {
+  //     skillsSection.classList.add("hidden");
+  //     toggleButton.textContent = "View Skills";
+  //   }
+  // });
+  
 });

@@ -1,4 +1,3 @@
-/* General reset */
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +12,6 @@ body {
     padding: 20px;
 }
 
-/* Resume container */
 .resume {
     max-width: 900px;
     margin: 0 auto;
@@ -23,7 +21,6 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Header section */
 header {
     background-color: #007BFF;
     color: white;
@@ -58,7 +55,6 @@ header {
     margin-top: 10px;
 }
 
-/* Section styling */
 section {
     margin-bottom: 20px;
 }
@@ -72,14 +68,12 @@ h2 {
     padding-bottom: 5px;
 }
 
-/* Profile section */
 .profile p {
     font-size: 1rem;
     color: #555;
     margin-bottom: 20px;
 }
 
-/* Education and contact sections */
 .education ul,
 .contact ul,
 .languages ul {
@@ -92,7 +86,6 @@ ul li {
     padding: 5px 0;
 }
 
-/* Skills toggle button */
 button {
     background-color: #007BFF;
     color: white;
@@ -118,7 +111,6 @@ button:hover {
     color: #555;
 }
 
-/* Miscellaneous */
 a {
     color: #007BFF;
     text-decoration: none;
@@ -129,7 +121,6 @@ a:hover {
 }
 
 
-/* Styling the resume form */
 
 
 .resumeForm {
@@ -158,7 +149,6 @@ a:hover {
     flex-direction: column;
   }
   
-  /* Input field styling */
   .inputContainer input,
   .inputContainer textarea {
     margin-bottom: 15px;
@@ -169,7 +159,6 @@ a:hover {
     transition: border 0.3s ease;
   }
   
-  /* Textarea specific styling */
   .inputContainer textarea {
     resize: vertical;
     min-height: 100px;
@@ -181,7 +170,6 @@ a:hover {
     outline: none;
   }
   
-  /* Button styling */
   .btnRe {
     padding: 12px;
     font-size: 1rem;

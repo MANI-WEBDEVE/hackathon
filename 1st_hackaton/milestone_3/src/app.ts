@@ -41,6 +41,33 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log(resumeSkills);
   console.log(skillsSection);
 
+  generateButton.disabled = true;
+
+  // Function to check if all inputs are filled
+  function checkInputs() {
+    if (
+      fullNameInput.value.trim() !== '' &&
+      emailInput.value.trim() !== '' &&
+      phoneNumberInput.value.trim() !== '' &&
+      profileSummaryInput.value.trim() !== '' &&
+      educationInput.value.trim() !== '' &&
+      skillsInput.value.trim() !== ''
+    ) {
+      generateButton.disabled = false; // Enable the button if all fields are filled
+    } else {
+      generateButton.disabled = true; // Keep it disabled if any field is empty
+    }
+  }
+
+  // Add event listeners for each input field
+  fullNameInput.addEventListener('input', checkInputs);
+  emailInput.addEventListener('input', checkInputs);
+  phoneNumberInput.addEventListener('input', checkInputs);
+  profileSummaryInput.addEventListener('input', checkInputs);
+  educationInput.addEventListener('input', checkInputs);
+  skillsInput.addEventListener('input', checkInputs);
+  
+
   generateButton.addEventListener("click", () => {
     resumeName.textContent = fullNameInput.value;
 

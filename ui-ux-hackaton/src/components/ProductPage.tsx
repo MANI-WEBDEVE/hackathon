@@ -62,7 +62,7 @@ const ProductPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-8 lg:px-16 py-4">
         {/* Image Gallery */}
         <div className="space-y-0 md:space-y-4 w-full flex flex-col-reverse md:flex-row gap-10 items-start ">
-          <div className="w-full flex grid grid-rows-1 grid-cols-4 md:w-[20%] md:grid-cols-1 md:grid-rows-4 gap-2 items-center justify-center ">
+          <div className="w-full  grid grid-rows-1 grid-cols-4 md:w-[20%] md:grid-cols-1 md:grid-rows-4 gap-2 items-center justify-center ">
             {productData.map((img, index) => (
               <div
                 key={index}
@@ -182,13 +182,13 @@ const ProductPage = () => {
       </div>
       <div className="border-b border-gray-200 w-full flex items-center justify-between gap-4 mt-10 px-10">
         <div className="flex gap-8 justify-between px-10 w-full">
-          <button className="w-full text-gray-500 pb-2 font-medium">
+          <button className="w-full text-gray-500 pb-2 font-medium text-sm md:text-xl">
             Product Details
           </button>
-          <button className="w-full border-b-2 border-black  pb-2 font-medium">
+          <button className="w-full border-b-2 border-black  pb-2 font-medium text-sm md:text-xl">
             Rating & Reviews
           </button>
-          <button className="w-full text-gray-500 pb-2 font-medium">FAQs</button>
+          <button className="w-full text-gray-500 pb-2 font-medium text-sm md:text-xl">FAQs</button>
         </div>
       </div>
       <div>

@@ -26,7 +26,7 @@ const styleCategories = [
 
 const BrowseStyle = () => {
     return (
-        <section className='mx-auto  w-[90%] rounded-t-[40px] overflow-hidden mx-auto md:m-0 px-14 sm:px-8 md:px-16 lg:px-28 py-10 sm:py-16 lg:py-20 bg-gray-100 '>
+        <section className='  w-[90%] rounded-t-[40px] overflow-hidden mx-auto md:m-0 px-14 sm:px-8 md:px-16 lg:px-28 py-10 sm:py-16 lg:py-20 bg-gray-100 '>
             <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold text-center mb-6 sm:mb-8 lg:mb-10'>BROWSE BY DRESS STYLE</h2>
             
             {/* Mobile: Single column, Tablet/Desktop: Two columns */}

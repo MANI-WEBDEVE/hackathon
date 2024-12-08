@@ -38,7 +38,7 @@ const Header = () => {
         )}
 
         <section className="w-full flex justify-between items-center py-3 px-4 sm:px-10 lg:px-20">
-          <div className="flex items-center gap-4 hidden  lg:flex">
+          <div className="md:flex items-center gap-4 hidden  lg:flex">
             <h1 className={`${intergral.className} text-2xl sm:text-3xl lg:text-4xl font-extrabold text-black`}>
               SHOP.CO
             </h1>
@@ -95,23 +95,23 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden absolute top-full left-0 w-full bg-white z-50 border-t border-gray-200 shadow-lg">
             <ul className="flex flex-col py-4">
-              <Link href="/">
-                <li className="px-6 py-3 hover:bg-gray-50 cursor-pointer hover:text-gray-600">
+              <Link href="/" >
+                <li onClick={() => setIsMenuOpen(false)} className="px-6 py-3 hover:bg-gray-50 cursor-pointer hover:text-gray-600">
                   Home
                 </li>
               </Link>
-              <Link href="/product">
-                <li className="px-6 py-3 hover:bg-gray-50 cursor-pointer hover:text-gray-600">
+              <Link href="/product" >
+                <li onClick={() => setIsMenuOpen(false)} className="px-6 py-3 hover:bg-gray-50 cursor-pointer hover:text-gray-600">
                   Product
                 </li>
               </Link>
-              <Link href="/category">
-                <li className="px-6 py-3 hover:bg-gray-50 cursor-pointer hover:text-gray-600">
+              <Link href="/category" >
+                <li onClick={() => setIsMenuOpen(false)} className="px-6 py-3 hover:bg-gray-50 cursor-pointer hover:text-gray-600">
                   Category
                 </li>
               </Link>
-              <Link href="/cart">
-                <li className="px-6 py-3 hover:bg-gray-50 cursor-pointer hover:text-gray-600">
+              <Link href="/cart" >
+                <li onClick={() => setIsMenuOpen(false)} className="px-6 py-3 hover:bg-gray-50 cursor-pointer hover:text-gray-600">
                   Cart
                 </li>
               </Link>

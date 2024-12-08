@@ -58,7 +58,7 @@ const HappyCustomers = () => {
                 </h2>
                 <div className='flex gap-3 sm:gap-4'>
                    <div className='px-3 py-2 md:px-4 md:py-4 rounded-full bg-black flex justify-center items-center'>
-                    <GiSettingsKnobs  className='invert w-4 h-4 md:w-6 md:w-6'/>
+                    <GiSettingsKnobs  className='invert w-4 h-4  md:w-6'/>
                    </div>
                    <div>
                    <button className='flex items-center gap-2 px-6 py-3 rounded-full text-black  hover:bg-black hover:text-white transition-colors border-[1px] border-black'>Latest<span><IoIosArrowDown className='w-4 h-4'/></span></button>

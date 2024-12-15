@@ -53,7 +53,7 @@ const ArraivalList = () => {
                 alt={item.title} 
                 width={200}  
                 height={200} 
-                className='object-cover h-[200px] w-full max-w-[200px] rounded-lg'
+                className='object-cover h-[200px] w-full max-w-[200px] rounded-lg hover:scale-110 transition-all'
               />
             </div>
             <div className='w-full text-center'>

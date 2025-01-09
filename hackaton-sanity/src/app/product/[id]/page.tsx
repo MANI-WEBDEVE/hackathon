@@ -1,10 +1,10 @@
 import ProductPage from '@/components/ProductPage'
 import React from 'react'
 
-const Page = () => {
+const Page = ({params}:any) => {
   return (
     <main>
-      <ProductPage />
+      <ProductPage id={params.id}/>
     </main>
   )
 }

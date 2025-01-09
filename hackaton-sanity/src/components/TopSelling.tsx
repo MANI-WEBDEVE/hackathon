@@ -5,20 +5,23 @@ import { client } from "../../src/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { FaStar } from "react-icons/fa";
 import Image from "next/image";
+import Loader from "./Loader";
+import { redirect } from "next/dist/server/api-utils";
+import Link from "next/link";
 
 type TopSellingData = {
   _id: number;
   name: string;
   price: number;
   discountPercentage: number;
-  tage: string[];
+  tags: string[];
   rating: number;
   imageUrl: string;
 };
 
 const TopSelling = () => {
   const [TopSelling, setTopSelling] = useState<TopSellingData[]>([]);
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const query = `*[_type == "product" && "men's clothing" in tags]{
             _id,
           name,
@@ -30,12 +33,25 @@ const TopSelling = () => {
         }
   `;
   useEffect(() => {
-    const getData = async () => {
-      const res = await client.fetch(query);
-      setTopSelling(res);
-    };
-    getData();
+    try {
+      setIsLoading(true);
+      const getData = async () => {
+        const res = await client.fetch(query);
+        setTopSelling(res);
+        console.log(res);
+      };
+      getData();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <section className="mb-10 flex w-full flex-col items-center justify-center gap-10 border-b px-20 py-16">
@@ -52,40 +68,44 @@ const TopSelling = () => {
                   key={item._id}
                   className="flex w-[280px] flex-shrink-0 snap-start flex-col items-center justify-center rounded-xl bg-gray-50/50 p-3 transition-all duration-300 hover:shadow-md sm:w-full"
                 >
-                  <div className="mb-3 flex w-full justify-center">
-                    <Image
-                      src={urlFor(item.imageUrl as string).url() as string}
-                      alt="arraival-image"
-                      width={200}
-                      height={200}
-                      className="h-[200px] w-full max-w-[200px] rounded-lg object-cover transition-all hover:scale-110"
-                    />
-                  </div>
-                  <div className="w-full text-center">
-                    <p className="line-clamp-2 flex min-h-[50px] items-center justify-center text-base font-semibold sm:text-lg">
-                      {item.name}
-                    </p>
-                    <div className="mt-2 flex items-center justify-center gap-2 text-yellow-600">
-                      {[...Array(5)].map((_, index) => (
-                        <FaStar
-                          key={index}
-                          className={`h-4 w-4 ${index < item.rating ? "text-yellow-400" : "text-gray-300"}`}
-                        />
-                      ))}
-                      <p className="ml-1 text-sm text-black">{item.rating}/5</p>
+                  <Link href={`/product/${item._id}`}>
+                    <div className="mb-3 flex w-full justify-center">
+                      <Image
+                        src={urlFor(item.imageUrl as string).url() as string}
+                        alt="arraival-image"
+                        width={200}
+                        height={200}
+                        className="h-[200px] w-full max-w-[200px] rounded-lg object-cover transition-all hover:scale-110"
+                      />
                     </div>
-                    <div className="mt-2 flex items-center justify-center gap-3">
-                      <p className="text-lg font-bold text-black">
-                        ${item.price}
+                    <div className="w-full text-center">
+                      <p className="line-clamp-2 flex min-h-[50px] items-center justify-center text-base font-semibold sm:text-lg">
+                        {item.name}
                       </p>
-                      <p className="text-base font-medium text-gray-500 line-through">
-                        ${item.price}
-                      </p>
-                      <p className="rounded-full bg-red-400/30 px-2 py-1 text-xs uppercase text-red-400">
-                        -{item.discountPercentage}%
-                      </p>
+                      <div className="mt-2 flex items-center justify-center gap-2 text-yellow-600">
+                        {[...Array(5)].map((_, index) => (
+                          <FaStar
+                            key={index}
+                            className={`h-4 w-4 ${index < item.rating ? "text-yellow-400" : "text-gray-300"}`}
+                          />
+                        ))}
+                        <p className="ml-1 text-sm text-black">
+                          {item.rating}/5
+                        </p>
+                      </div>
+                      <div className="mt-2 flex items-center justify-center gap-3">
+                        <p className="text-lg font-bold text-black">
+                          ${item.price}
+                        </p>
+                        <p className="text-base font-medium text-gray-500 line-through">
+                          ${item.discountPercentage}
+                        </p>
+                        <p className="rounded-full bg-red-400/30 px-2 py-1 text-xs uppercase text-red-400">
+                          -{item.discountPercentage}%
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>

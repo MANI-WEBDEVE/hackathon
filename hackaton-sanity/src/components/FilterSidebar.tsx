@@ -1,3 +1,4 @@
+'use client'
 import * as React from "react";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
@@ -45,7 +46,12 @@ const colors = [
 
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
-export function FilterSidebar() {
+interface FilterSidebarProps {
+  tags: string[]; // Define the 'tags' prop to receive the tag data
+}
+
+export const  FilterSidebar:React.FC<FilterSidebarProps> = ({tags}) => {
+  console.log(tags)
   const FilterContent = () => (
     <>
       <section className=" border-[1px] border-black/20 rounded-md  px-2 ">
@@ -86,18 +92,7 @@ export function FilterSidebar() {
               </div>
             </div>
 
-            <div className="space-y-3 border-b py-4">
-              <h3 className="font-semibold">Colors</h3>
-              <div className="flex flex-wrap gap-2">
-                {colors.map((color, index) => (
-                  <button
-                    key={index}
-                    className={`h-6 w-6 rounded-full ${color} border border-gray-200`}
-                    aria-label={`Select color ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
+            
 
             <div className="space-y-3 border-b py-4">
               <h3 className="font-semibold">Size</h3>
@@ -112,30 +107,7 @@ export function FilterSidebar() {
                 ))}
               </div>
             </div>
-            <div className=" px-4 py-4 rounded-md">
-              <div className="flex items-center justify-between ">
-                <p>T-Shirt</p>
-                <MdArrowForwardIos />
-              </div>
-              <div className="flex items-center justify-between ">
-                <p>Short</p>
-                <MdArrowForwardIos />
-              </div>
-              <div className="flex items-center justify-between ">
-                <p>Hoodie</p>
-                <MdArrowForwardIos />
-              </div>
-              <div className="flex items-center justify-between ">
-                <p>Jeans</p>
-                <MdArrowForwardIos />
-              </div>
-              <div className="flex items-center justify-between ">
-                <p>Shirt</p>
-                <MdArrowForwardIos />
-              </div>
-            </div>
-
-            <Button className="w-full">Apply Filter</Button>
+         
           </div>
         </ScrollArea>
       </section>

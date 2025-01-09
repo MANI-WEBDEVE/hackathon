@@ -1,27 +1,65 @@
-import {CategoryProduct} from '@/components/CategoryProduct'
-import {FilterSidebar} from '@/components/FilterSidebar'
-import React from 'react'
-import { MdKeyboardArrowRight } from 'react-icons/md'
+"use client";
+
+import { CategoryProduct } from "@/components/CategoryProduct";
+import { FilterSidebar } from "@/components/FilterSidebar";
+import { useEffect, useState } from "react";
+import { client } from "@/sanity/lib/client";
 
 const page = () => {
+  const [tagsData, setTagsData] = useState([]);
+  const [allData, setallData] = useState([]);
+
+  const query_1 = `*[_type == "product" ]{
+  tags
+}
+`;
+  const query_2 = `*[_type == "product"]{
+  tags,
+  _id,
+  name,
+  image,
+  rating,
+  price,
+}
+`;
+  useEffect(() => {
+    const getTags = async () => {
+      try {
+        const res = await client.fetch(query_1);
+        setTagsData(res);
+        // console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getTags();
+  }, []);
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await client.fetch(query_2);
+        setallData(res);
+        // console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProducts();
+  }, []);
+
   return (
     <>
-    <div className="flex items-center gap-2 px-4 md:px-8 lg:px-16 py-4 text-sm">
-        <span className="text-gray-500">Home</span>
-        <MdKeyboardArrowRight className="text-gray-500" />
-        <span className="text-gray-500">Shop</span>
-        <MdKeyboardArrowRight className="text-gray-500" />
-        <span className="text-gray-500">Men</span>
-        <MdKeyboardArrowRight className="text-gray-500" />
-        <span>T-shirts</span>
+     
+      <div className="flex flex-col gap-6 p-4 md:flex-row">
+        {tagsData.length > 0 && allData.length > 0 && (
+          <>
+            <FilterSidebar tags={(tagsData as string[]) || []} />
+            <CategoryProduct data={allData as any} />
+          </>
+        )}
       </div>
-       <div className="flex flex-col md:flex-row gap-6 p-4">
-       
-      <FilterSidebar />
-      <CategoryProduct />
-    </div>
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;

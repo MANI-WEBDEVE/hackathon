@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import * as React from "react";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
@@ -8,77 +8,128 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { GiSettingsKnobs } from "react-icons/gi";
+import { CategoryProduct } from "./CategoryProduct";
+import { Label } from "./ui/label";
 
-interface FilterSection {
-  title: string;
-  items: string[];
-}
-
-const filterSections: FilterSection[] = [
-  {
-    title: "T-shirts",
-    items: ["Casual", "Formal", "Party", "Gym"],
-  },
-  {
-    title: "Styles",
-    items: ["Classic", "Modern", "Vintage", "Streetwear"],
-  },
-  {
-    title: "Brands",
-    items: ["Nike", "Adidas", "Puma", "Reebok"],
-  },
-  {
-    title: "Gender",
-    items: ["Men", "Women", "Unisex"],
-  },
-];
-
-const colors = [
-  "bg-red-500",
-  "bg-green-500",
-  "bg-yellow-500",
-  "bg-orange-500",
-  "bg-blue-500",
-  "bg-purple-500",
-  "bg-pink-500",
-  "bg-black",
-];
 
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
 interface FilterSidebarProps {
   tags: string[]; // Define the 'tags' prop to receive the tag data
+  data: { tags: string[] }[];
 }
 
-export const  FilterSidebar:React.FC<FilterSidebarProps> = ({tags}) => {
-  console.log(tags)
+export const FilterSidebar: React.FC<FilterSidebarProps> = ({ tags, data }) => {
+  const [filterProductCheck, setFilterProductCheck] = React.useState<{
+    TShirt: boolean,
+    Short: boolean,
+    Hoodie: boolean,
+    Jeans: boolean,
+    Shirt: boolean,
+  }>({
+    TShirt: false,
+    Short: false,
+    Hoodie: false,
+    Jeans: false,
+    Shirt: false,
+  });
+
+  const [filteredData, setFilteredData] = React.useState<{ tags: string[] }[]>(data);
+
+  // Update the filtered data whenever filters changeReact.
+  React.useEffect(() => {
+    const selectedTags = Object.keys(filterProductCheck).filter(
+      (key) => filterProductCheck[key as keyof typeof filterProductCheck]
+    );
+
+    if (selectedTags.length > 0) {
+      const filtered = data.filter((product) =>
+        selectedTags.some((tag) => product.tags.includes(tag))
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(data); // If no tags are selected, show all data
+    }
+  }, [filterProductCheck, data]);
+
+
   const FilterContent = () => (
     <>
-      <section className=" border-[1px] border-black/20 rounded-md  px-2 ">
-        <div className="flex items-center justify-between px-4 py-5 border-b rounded-t-md ">
-          <h3>Filter</h3> <GiSettingsKnobs size={20} className=" w-6 h-6" />
+      <section className="sticky top-0 rounded-md border-[1px] border-black/20 px-2 md:h-1/2 md:border-none">
+        <div className="flex items-center justify-between rounded-t-md border-b px-4 py-5">
+          <h3>Filter</h3> <GiSettingsKnobs size={20} className="h-6 w-6" />
         </div>
-        <ScrollArea className="h-full ">
-          <div className="space-y-4 py-4 border-b">
-            <div className=" px-4 py-4 rounded-md">
-              <div className="flex items-center justify-between ">
-                <p>T-Shirt</p>
+        <ScrollArea className="h-full">
+          <div className="space-y-4 border-b py-4">
+            <div className="flex flex-col justify-center gap-3 rounded-md px-4 py-4">
+              <div className="flex items-center justify-between">
+                <Checkbox
+                  id="tshirt"
+                  checked={filterProductCheck.TShirt}
+                  onCheckedChange={(checked) =>
+                    setFilterProductCheck((prevState) => ({
+                      ...prevState,
+                      TShirt: checked as boolean,
+                    }))
+                  }
+                />
+                <Label htmlFor="tshirt">T-Shirt</Label>
                 <MdArrowForwardIos />
               </div>
-              <div className="flex items-center justify-between ">
-                <p>Short</p>
+              <div className="flex items-center justify-between">
+                <Checkbox
+                  id="short"
+                  checked={filterProductCheck.Short} 
+                  onCheckedChange={(checked) =>
+                    setFilterProductCheck((prevState) => ({
+                      ...prevState,
+                      Short: checked as boolean,
+                    }))
+                  }
+                />
+                <Label htmlFor="short">Short</Label>
                 <MdArrowForwardIos />
               </div>
-              <div className="flex items-center justify-between ">
-                <p>Hoodie</p>
+              <div className="flex items-center justify-between">
+                <Checkbox
+                  id="hoodie"
+                  checked={filterProductCheck.Hoodie}
+                  onCheckedChange={(checked) =>
+                    setFilterProductCheck((prevState) => ({
+                      ...prevState,
+                      Hoodie: checked as boolean,
+                    }))
+                  }
+                />
+                <Label htmlFor="hoodie">Hoodie</Label>
                 <MdArrowForwardIos />
               </div>
-              <div className="flex items-center justify-between ">
-                <p>Jeans</p>
+              <div className="flex items-center justify-between">
+                <Checkbox
+                  id="Jeans"
+                  checked={filterProductCheck.Jeans}
+                  onCheckedChange={(checked) =>
+                    setFilterProductCheck((prevState) => ({
+                      ...prevState,
+                      Jeans: checked as boolean,
+                    }))
+                  }
+                />
+                <Label htmlFor="jeans">Jeans</Label>
                 <MdArrowForwardIos />
               </div>
-              <div className="flex items-center justify-between ">
-                <p>Shirt</p>
+              <div className="flex items-center justify-between">
+                <Checkbox
+                  id="shirt"
+                  checked={filterProductCheck.Shirt}
+                  onCheckedChange={(checked) =>
+                    setFilterProductCheck((prevState) => ({
+                      ...prevState,
+                      Shirt: checked as boolean,
+                    }))
+                  }
+                />
+                <Label htmlFor="shirt">Shirt</Label>
                 <MdArrowForwardIos />
               </div>
             </div>
@@ -91,9 +142,6 @@ export const  FilterSidebar:React.FC<FilterSidebarProps> = ({tags}) => {
                 <span>$500</span>
               </div>
             </div>
-
-            
-
             <div className="space-y-3 border-b py-4">
               <h3 className="font-semibold">Size</h3>
               <div className="flex flex-wrap gap-2">
@@ -107,7 +155,6 @@ export const  FilterSidebar:React.FC<FilterSidebarProps> = ({tags}) => {
                 ))}
               </div>
             </div>
-         
           </div>
         </ScrollArea>
       </section>
@@ -116,14 +163,17 @@ export const  FilterSidebar:React.FC<FilterSidebarProps> = ({tags}) => {
 
   return (
     <>
-      <div className="hidden lg:block w-64 border-r pr-4">
-        <FilterContent />
+      <div className="flex justify-center">
+        <div className="hidden w-64 flex-col gap-6 border-r p-4 pr-4 md:flex md:flex-row lg:block">
+          <FilterContent />
+        </div>
+        <CategoryProduct data={filteredData} />
       </div>
       <Sheet>
         <SheetTrigger asChild>
           <Button
             variant="outline"
-            className="lg:hidden fixed bottom-4 left-4 z-50"
+            className="fixed bottom-4 left-4 z-50 lg:hidden"
           >
             <Menu className="mr-2 h-4 w-4" />
             Filters
@@ -135,4 +185,4 @@ export const  FilterSidebar:React.FC<FilterSidebarProps> = ({tags}) => {
       </Sheet>
     </>
   );
-}
+};

@@ -16,6 +16,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { urlFor } from "@/sanity/lib/image";
+import Link from "next/link";
 
 interface Product {
   id: number;
@@ -107,98 +109,60 @@ const products: Product[] = [
   },
 ];
 interface CategoryProductProps {
-    data: any[]; // Define the 'data' prop to receive product data
+  data: any[]; // Define the 'data' prop to receive product data
 }
 
+export const CategoryProduct: React.FC<CategoryProductProps> = ({ data }) => {
 
-
-export const CategoryProduct: React.FC<CategoryProductProps> = ({data}) =>  {
-  console.log(data)
   return (
     <div className="flex-1 p-4 sm:p-6 lg:p-8">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="text-2xl font-semibold mb-4 sm:mb-0">Casual</h2>
-        <Select defaultValue="popular">
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Sort by" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="popular">Most Popular</SelectItem>
-            <SelectItem value="price-low">Price: Low to High</SelectItem>
-            <SelectItem value="price-high">Price: High to Low</SelectItem>
-            <SelectItem value="newest">Newest First</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
       <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="group rounded-lg border bg-card text-card-foreground shadow-sm "
-          >
-            <div className="relative overflow-hidden">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="h-[200px] sm:h-[210px] w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-4">
-              <h3 className="font-semibold">{product.name}</h3>
-              <div className="mt-2 flex items-center space-x-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`h-4 w-4 ${
-                      i < Math.floor(product.rating)
-                        ? "fill-yellow-400 text-yellow-400"
-                        : "fill-gray-200 text-gray-200"
-                    }`}
+        {data.length > 0 &&
+          data &&
+          data.map((product) => (
+            <div
+              key={product._id}
+              className="group rounded-lg border bg-card text-card-foreground shadow-sm"
+            >
+              <Link href={`/product/${product._id}`}>
+                <div className="relative overflow-hidden">
+                  <img
+                    src={urlFor(product.image as string).url()}
+                    alt={product.name}
+                    className="h-[200px] w-full object-cover transition-transform duration-300 group-hover:scale-105 sm:h-[210px]"
                   />
-                ))}
-                <span className="text-sm text-gray-500">
-                  ({product.rating})
-                </span>
-              </div>
-              <div className="mt-2 flex items-center space-x-2">
-                <span className="font-semibold">${product.price}</span>
-                {product.originalPrice && (
-                  <span className="text-sm text-gray-500 line-through">
-                    ${product.originalPrice}
-                  </span>
-                )}
-              </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold">{product.name}</h3>
+                  <div className="mt-2 flex items-center space-x-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`h-4 w-4 ${
+                          i < Math.floor(product.rating)
+                            ? "fill-yellow-400 text-yellow-400"
+                            : "fill-gray-200 text-gray-200"
+                        }`}
+                      />
+                    ))}
+                    <span className="text-sm text-gray-500">
+                      ({product.rating})
+                    </span>
+                  </div>
+                  <div className="mt-2 flex items-center space-x-2">
+                    <span className="font-semibold">${product.price}</span>
+                    {product.originalPrice && (
+                      <span className="text-sm text-gray-500 line-through">
+                        ${product.originalPrice}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </Link>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className="w-full mt-10 flex items-center justify-center">
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious href="#" />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">2</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">3</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">4</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext href="#" />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </div>
+          ))}
+      </div>{" "}
+     
     </div>
   );
-}
+};

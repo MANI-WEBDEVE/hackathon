@@ -1,9 +1,8 @@
 "use client";
 
-import { CategoryProduct } from "@/components/CategoryProduct";
 import { FilterSidebar } from "@/components/FilterSidebar";
-import { useEffect, useState } from "react";
 import { client } from "@/sanity/lib/client";
+import { useEffect, useState } from "react";
 
 const page = () => {
   const [tagsData, setTagsData] = useState([]);
@@ -13,7 +12,7 @@ const page = () => {
   tags
 }
 `;
-  const query_2 = `*[_type == "product"]{
+  const query_2 = `*[_type == "product" ]{
   tags,
   _id,
   name,
@@ -38,6 +37,7 @@ const page = () => {
     const getProducts = async () => {
       try {
         const res = await client.fetch(query_2);
+
         setallData(res);
         // console.log(res);
       } catch (err) {
@@ -49,12 +49,14 @@ const page = () => {
 
   return (
     <>
-     
-      <div className="flex flex-col gap-6 p-4 md:flex-row">
+      <div className="flex items-center justify-center">
         {tagsData.length > 0 && allData.length > 0 && (
           <>
-            <FilterSidebar tags={(tagsData as string[]) || []} />
-            <CategoryProduct data={allData as any} />
+            <FilterSidebar
+              tags={(tagsData as string[]) || []}
+              data={(allData as { tags: string[] }[]) || []}
+            />
+            {/* <CategoryProduct data={allData as any} /> */}
           </>
         )}
       </div>

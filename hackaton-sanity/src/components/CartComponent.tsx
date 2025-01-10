@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useCartStore from "@/store/cartStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X, Minus, Plus, ArrowRight } from "lucide-react";
@@ -15,8 +16,9 @@ interface CartItem {
   quantity: number;
   image: string;
 }
-
+import { urlFor } from "@/sanity/lib/image";
 export default function CartComponent() {
+  const [priceProduct, setPriceProduct] = useState(0);
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
       id: 1,
@@ -49,31 +51,34 @@ export default function CartComponent() {
         "https://s3-alpha-sig.figma.com/img/6115/920b/12942762aefb7c7ac954e78b76284504?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GnB39R0poDoKWZVk7khTTTmcfh5KU-cvHy2m~8vJJhQFe6ExdCS-E70jqpei5gUbnr5nF9r2LTQ~09rrJsvnc4hbQztpuXBRvAMSxTmaDs~wB9EmwmTorwsWKBEMLHByHOcpL7mtAIxtXGltw5a1IlZfiHNzYcXE8azIvDc0WPCiwSa5H0Qgd3KFSHL9E65QbQG9uReF9mC1Fp5ZMsC8h~2f3bNgm4YiE6Z3MHMFgQyJqsgT1ulE4ldMv2CTwjXP9f5paEg2SgC55wX0xdJClZLS5s1PnKkyW7jot0U1TMd5J1g5T5CMv8Cxq17p1HfZB19f06~rwrhW4393RyMIWQ__",
     },
   ]);
-
+  const { cart, removeFromCart } = useCartStore();
   const updateQuantity = (id: number, change: number) => {
     setCartItems(
       cartItems.map((item) =>
         item.id === id
           ? { ...item, quantity: Math.max(1, item.quantity + change) }
-          : item
-      )
+          : item,
+      ),
     );
   };
 
   const removeItem = (id: number) => {
     setCartItems(cartItems.filter((item) => item.id !== id));
   };
-
+  useEffect(() => {
+    const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+    setPriceProduct(totalPrice);
+  }, [cart, removeFromCart]);
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
   const discount = 113;
   const deliveryFee = 15;
   const total = subtotal - discount + deliveryFee;
 
   return (
-    <div className="min-h-screen  p-4  md:p-6 lg:p-8">
+    <div className="min-h-screen p-4 md:p-6 lg:p-8">
       <div className="mx-auto max-w-6xl">
         <nav className="mb-8 flex items-center gap-2 text-sm">
           <span className="text-gray-500">Home</span>
@@ -84,66 +89,53 @@ export default function CartComponent() {
         <div className="lg:grid lg:grid-cols-3 lg:gap-8">
           <div className="lg:col-span-2">
             <h1 className="mb-6 text-2xl font-extrabold">YOUR CART</h1>
-            <div className="space-y-6 border-[1px] border-gray-400/30 rounded-lg p-5">
-              {cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-start gap-4 border-b border-gray-400/30 pb-6 "
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="h-20 w-20 rounded-lg object-cover"
-                  />
-                  <div className="flex flex-1 flex-col gap-1">
-                    <div className="flex items-start justify-between">
-                      <h3 className="font-medium">{item.name}</h3>
-                      <button
-                        onClick={() => removeItem(item.id)}
-                        className="text-red-500 hover:text-red-600"
-                      >
-                        <MdDelete className="h-5 w-5" />
-                      </button>
-                    </div>
-                    <p className="text-sm text-gray-500">{item.details}</p>
-                    <p className="text-sm text-gray-500">{item.color}</p>
-                    <div className="mt-2 flex items-center justify-between">
-                      <p className="font-medium text-xl">${item.price}</p>
-                      <div className="flex items-center gap-3">
+            <div className="space-y-6 rounded-lg border-[1px] border-gray-400/30 p-5">
+              {cart.length === 0 ? (
+                <div className="py-4 text-center">Your cart is empty</div>
+              ) : (
+                cart.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-start gap-4 border-b border-gray-400/30 pb-6"
+                  >
+                    <img
+                      src={urlFor(item.image as string).url()}
+                      alt={item.name}
+                      className="h-20 w-20 rounded-lg object-cover"
+                    />
+                    <div className="flex flex-1 flex-col gap-1">
+                      <div className="flex items-start justify-between">
+                        <h3 className="font-medium">{item.name}</h3>
                         <button
-                          onClick={() => updateQuantity(item.id, -1)}
-                          className="rounded-full border border-gray-600 p-1 hover:bg-gray-800"
+                          onClick={() => removeFromCart(item.id)}
+                          className="text-red-500 hover:text-red-600"
                         >
-                          <Minus className="h-4 w-4" />
-                        </button>
-                        <span>{item.quantity}</span>
-                        <button
-                          onClick={() => updateQuantity(item.id, 1)}
-                          className="rounded-full border border-gray-600 p-1 hover:bg-gray-800"
-                        >
-                          <Plus className="h-4 w-4" />
+                          <MdDelete className="h-5 w-5" />
                         </button>
                       </div>
-                      
+
+                      <div className="mt-2 flex items-center justify-between">
+                        <p className="text-xl font-medium">${item.price}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}{" "}
             </div>
           </div>
 
           <div className="mt-8 lg:mt-0">
             <h2 className="mb-6 text-2xl font-medium">Order Summary</h2>
-            <div className="rounded-xl bg-neutral-300/20   p-6 border-[1px] border-gray-400/30">
+            <div className="rounded-xl border-[1px] border-gray-400/30 bg-neutral-300/20 p-6">
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal</span>
-                  <span>${subtotal}</span>
+                  <span>${priceProduct}</span>
                 </div>
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <span className="text-gray-600">Discount (20%)</span>
                   <span className="text-red-500">-${discount}</span>
-                </div>
+                </div> */}
                 <div className="flex justify-between">
                   <span className="text-gray-600">Delivery Fee</span>
                   <span>${deliveryFee}</span>
@@ -151,26 +143,26 @@ export default function CartComponent() {
                 <div className="border-t border-gray-400/30 pt-4">
                   <div className="flex justify-between">
                     <span>Total</span>
-                    <span className="text-xl font-medium">${total}</span>
+                    <span className="text-xl font-medium">${priceProduct}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="relative">
                     <Input
                       placeholder="Add promo code"
-                      className="flex-1 bg-transparent rounded-full border border-gray-600 pl-[1.75rem] pr-[5.75rem] py-2 text-sm placeholder:text-gray-600 focus:outline-none "
+                      className="flex-1 rounded-full border border-gray-600 bg-transparent py-2 pl-[1.75rem] pr-[5.75rem] text-sm placeholder:text-gray-600 focus:outline-none"
                     />
                     <IoIosPricetag className="absolute left-3 top-1/2 -translate-y-1/2" />
                   </div>
                   <Button
                     variant="outline"
-                    className="bg-black text-white rounded-full px-5 py-3"
+                    className="rounded-full bg-black px-5 py-3 text-white"
                     size="sm"
                   >
                     Apply
                   </Button>
                 </div>
-                <Button className="w-full bg-black text-white rounded-full py-3  hover:bg-gray-200 hover:text-black">
+                <Button className="w-full rounded-full bg-black py-3 text-white hover:bg-gray-200 hover:text-black">
                   Go to Checkout
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>

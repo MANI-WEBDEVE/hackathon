@@ -8,6 +8,7 @@ import ProductHappyCustomer from "./ProductHappyCustomer";
 import { client } from "@/sanity/lib/client";
 import Loader from "./Loader";
 import { urlFor } from "@/sanity/lib/image";
+import useCartStore from "@/store/cartStore";
 
 
 interface ProductType {
@@ -25,8 +26,16 @@ interface ProductType {
   _id: string;
 }
 
-const ProductPage = ({id}:any) => {
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  // Add other product properties as needed
+}
 
+const ProductPage = ({id}:any) => {
+  const {addToCart, removeFromCart} = useCartStore()
   const query = `*[_type == "product" && _id == "${id}"][0]`;
   
 
@@ -208,7 +217,7 @@ return (
               >
                 -
               </button>
-              <span className="px-4 py-2">{quantity}</span>
+            
               <button
                 onClick={() => handleQuantityChange(1)}
                 className="px-4 py-2 hover:bg-gray-100"
@@ -216,7 +225,12 @@ return (
                 +
               </button>
             </div>
-            <button className="flex-1 bg-black text-white py-2 px-8 rounded-full hover:bg-gray-800 transition-colors">
+            <button  onClick={() => productData && addToCart({
+              id: productData._id,
+              name: productData.name,
+              price: productData.price,
+              image: productData.image
+            })} className="flex-1 bg-black text-white py-2 px-8 rounded-full hover:bg-gray-800 transition-colors">
               Add to Cart
             </button>
           </div>

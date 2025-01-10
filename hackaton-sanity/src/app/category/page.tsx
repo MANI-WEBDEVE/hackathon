@@ -7,12 +7,13 @@ import { useEffect, useState } from "react";
 const page = () => {
   const [tagsData, setTagsData] = useState([]);
   const [allData, setallData] = useState([]);
+  const [sizes, setSizes] = useState([])
 
   const query_1 = `*[_type == "product" ]{
   tags
 }
 `;
-  const query_2 = `*[_type == "product" ]{
+const query_2 = `*[_type == "product" ]{
   tags,
   _id,
   name,
@@ -21,12 +22,13 @@ const page = () => {
   price,
 }
 `;
+
+
   useEffect(() => {
     const getTags = async () => {
       try {
         const res = await client.fetch(query_1);
         setTagsData(res);
-        // console.log(res);
       } catch (err) {
         console.log(err);
       }

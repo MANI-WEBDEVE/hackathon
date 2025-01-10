@@ -1,10 +1,21 @@
 import ProductPage from '@/components/ProductPage'
+import { client } from '@/sanity/lib/client';
 import React from 'react'
 
-const Page = ({params}:any) => {
+export const generateStaticParams = async () => {
+  const query = `*[_type=="product"]{_id}`;
+  const ids = await client.fetch(query); // Fetch products' IDs from the database
+  return ids.map(({ _id }: { _id: string }) => ({ id: _id })); // Return an array of objects containing IDs
+};
+
+
+
+
+
+const Page = ({params:{id}}:any) => {
   return (
     <main>
-      <ProductPage id={params.id}/>
+      <ProductPage id={id}/>
     </main>
   )
 }

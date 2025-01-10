@@ -104,18 +104,21 @@ export default function CartComponent() {
                       className="h-20 w-20 rounded-lg object-cover"
                     />
                     <div className="flex flex-1 flex-col gap-1">
-                      <div className="flex items-start justify-between">
-                        <h3 className="font-medium">{item.name}</h3>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                        <h3 className="font-medium text-xl uppercase">{item.name}</h3>
+                        <div className="text-sm px-3 py-2 rounded-full bg-black text-white">{item.size}</div>
+                        </div>
                         <button
                           onClick={() => removeFromCart(item.id)}
                           className="text-red-500 hover:text-red-600"
-                        >
+                          >
                           <MdDelete className="h-5 w-5" />
                         </button>
                       </div>
 
-                      <div className="mt-2 flex items-center justify-between">
-                        <p className="text-xl font-medium">${item.price}</p>
+                      <div className="mt-2 flex items-center justify-start gap-4">
+                        <p className="text-xl font-semibold ">${item.price}</p>
                       </div>
                     </div>
                   </div>
@@ -143,7 +146,7 @@ export default function CartComponent() {
                 <div className="border-t border-gray-400/30 pt-4">
                   <div className="flex justify-between">
                     <span>Total</span>
-                    <span className="text-xl font-medium">${priceProduct}</span>
+                    <span className="text-xl font-medium">${priceProduct + deliveryFee}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">

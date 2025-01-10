@@ -45,7 +45,7 @@ const ArraivalList: React.FC<ArraivalListProps> = ({ data }) => {
                 <div className="mt-2 flex items-center justify-center gap-3">
                   <p className="text-lg font-bold text-black">${item.price}</p>
                   <p className="text-base font-medium text-gray-500 line-through">
-                    ${item.price}
+                    ${item.discountPercentage}
                   </p>
                   <p className="rounded-full bg-red-400/30 px-2 py-1 text-xs uppercase text-red-400">
                     -{item.discountPercentage}%

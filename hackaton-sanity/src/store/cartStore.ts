@@ -4,7 +4,8 @@ interface Product {
     id: string;
     name: string;
     price: number;
-    image: string
+    image: string;
+    size: string;
     // Add other product properties as needed
 }
 

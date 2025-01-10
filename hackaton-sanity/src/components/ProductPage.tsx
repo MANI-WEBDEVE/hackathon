@@ -34,6 +34,8 @@ interface Product {
   // Add other product properties as needed
 }
 
+
+
 const ProductPage = ({id}:any) => {
   const {addToCart, removeFromCart} = useCartStore()
   const query = `*[_type == "product" && _id == "${id}"][0]`;
@@ -50,7 +52,6 @@ const ProductPage = ({id}:any) => {
         setIsLoading(true)
         const product = await client.fetch(query); 
         setProductData(product)
-        console.log(urlFor(product.image).url())
       }
       getData()
     } catch (err) {
@@ -229,7 +230,8 @@ return (
               id: productData._id,
               name: productData.name,
               price: productData.price,
-              image: productData.image
+              image: productData.image,
+              size: selectedSize,
             })} className="flex-1 bg-black text-white py-2 px-8 rounded-full hover:bg-gray-800 transition-colors">
               Add to Cart
             </button>

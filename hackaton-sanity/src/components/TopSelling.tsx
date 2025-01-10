@@ -1,13 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { client } from "../../src/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
-import { FaStar } from "react-icons/fa";
 import Image from "next/image";
-import Loader from "./Loader";
-import { redirect } from "next/dist/server/api-utils";
 import Link from "next/link";
+import { FaStar } from "react-icons/fa";
+import { client } from "../../src/sanity/lib/client";
+import Loader from "./Loader";
 
 type TopSellingData = {
   _id: number;
@@ -38,7 +37,6 @@ const TopSelling = () => {
       const getData = async () => {
         const res = await client.fetch(query);
         setTopSelling(res);
-        console.log(res);
       };
       getData();
     } catch (error) {

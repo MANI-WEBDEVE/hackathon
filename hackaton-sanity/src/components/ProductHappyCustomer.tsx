@@ -1,13 +1,12 @@
 "use client";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { IoIosArrowDown } from "react-icons/io";
-import { client } from "@/sanity/lib/client";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
-import Link from "next/link";
 const reviews = [
   {
     id: 1,
@@ -94,7 +93,6 @@ const HappyCustomers: React.FC<HappyCustomersProps> = ({ tags }) => {
       try {
         const res = await client.fetch(query);
         setProductCategory(res);
-        console.log(res)
       } catch (err) {
         console.log(err);
       } 

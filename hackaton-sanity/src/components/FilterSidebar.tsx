@@ -12,11 +12,11 @@ import { CategoryProduct } from "./CategoryProduct";
 import { Label } from "./ui/label";
 
 
-const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
 interface FilterSidebarProps {
   tags: string[]; // Define the 'tags' prop to receive the tag data
   data: { tags: string[] }[];
+
 }
 
 export const FilterSidebar: React.FC<FilterSidebarProps> = ({ tags, data }) => {
@@ -142,19 +142,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({ tags, data }) => {
                 <span>$500</span>
               </div>
             </div>
-            <div className="space-y-3 border-b py-4">
-              <h3 className="font-semibold">Size</h3>
-              <div className="flex flex-wrap gap-2">
-                {sizes.map((size) => (
-                  <button
-                    key={size}
-                    className="rounded-full border px-3 py-1 text-sm hover:bg-gray-100"
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
+            
           </div>
         </ScrollArea>
       </section>
